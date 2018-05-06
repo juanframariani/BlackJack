@@ -36,7 +36,14 @@ int main (int argc, char *argv[]) {
 	
 	for(int j=0; j<52; j++){			          //recorre el arreglo completo
 		position=deck[j];			              //le asigna el valor del arreglo anterior a position
-		cout << mazo[position] << endl;		      //muestra el valor de mazo en la posición aleatoria que designó el método barajar
 	}
+	int deckUser[10];					//declara un vector para las cartas del usuario
+	int deckCroupier[10];					//declara un vector para las cartas del croupier
+	deckUser[0] = deck[0];					//asigna las posiciones del deck a las cartas del usuario y del croupier
+	deckCroupier[0] = deck[1];
+	deckUser[1] = deck[2];
+	deckCroupier[1] = deck[3];
+	cout << "Tus cartas: " << deckUser[0] << " " << deckUser[1] << endl; 		//muestra el valor de las cartas repartidas al usuario
+	cout << "Las cartas de la banca: " << deckCroupier[0] << "XXX" << endl; 	//muestra el valor de las cartas repartidas al croupier
 	
 }
