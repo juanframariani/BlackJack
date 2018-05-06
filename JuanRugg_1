@@ -1,0 +1,32 @@
+
+void nombreJugador() {
+
+    char Nombre[20];
+    int longitud;
+    cout << "Jugador N°1, Ingrese su nombre: ";
+    gets(Nombre);
+    longitud = strlen(Nombre);
+    if (longitud > 20) {
+        cout << "El nombre ingresado es demasiado largo, por favor ingrese uno con menos de 20 caracteres.";
+    } else {
+        cout << "El Nombre ingresado es: " << Nombre;
+    }
+
+
+    return 0;
+
+}
+
+void turno_croupier() {
+    while (mano[0].conteo_cartas < 17) {
+        pedirCarta(0);
+    }
+    if (mano[0].conteo_cartas >= 17) {
+        paso(0);
+
+    }
+
+
+    return 0;
+}
+
