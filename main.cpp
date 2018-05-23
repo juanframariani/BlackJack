@@ -68,6 +68,31 @@ case 1:
 	cout << "Tus cartas: " << deckUser[0] << " - " << deckUser[1] << endl; 		//muestra el valor de las cartas repartidas al usuario
 	cout << "Las cartas de la banca: " << deckCroupier[0] << " - XX" << endl; 	//muestra el valor de las cartas repartidas al croupier
 	cout << "\n";
+		if((deckUser[0]=="AP")||(deckUser[0]=="AC")||(deckUser[0]=="AD")||(deckUser[0]=="AT")||(deckUser[1]=="AP")||(deckUser[1]=="AC")||(deckUser[1]=="AD")||(deckUser[1]=="AT")){
+				
+				for(int i; i<2; i++){
+					deckUser[i]=i;
+					cout<< "\n\n";
+					cout<<"CUAL ES EL VALOR DEL AS?\n\n";
+					cout<<" 1 - AS VALE 1\n";
+					cout<<" 2 - AS VALE 11\n\n";
+					int option;
+					cin>>option;
+					
+					switch(option){
+					case 1:
+						deckUser[i]=1;
+						cout<<"EL AS VALE 1";
+						break;
+					case 2:
+						deckUser[i]=11;
+						cout<<"EL AS VALE 11";
+						break;
+					}
+					
+				}
+				
+			}
 	
 	break;
 
