@@ -2,6 +2,6 @@
 #define CARTAS_H
 
 
-void cartas(int[], int);
+void cartas(int[], int *);
 
 #endif
