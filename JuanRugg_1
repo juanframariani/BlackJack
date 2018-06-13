@@ -1,0 +1,65 @@
+
+void nombreJugador() {
+
+    char Nombre[20];
+    int longitud;
+    cout << "Jugador N°1, Ingrese su nombre: ";
+    gets(Nombre);
+    longitud = strlen(Nombre);
+    if (longitud > 20) {
+        cout << "El nombre ingresado es demasiado largo, por favor ingrese uno con menos de 20 caracteres.";
+    } else {
+        cout << "El Nombre ingresado es: " << Nombre;
+    }
+
+
+    return 0;
+
+}
+
+void turno_croupier() {
+    while (mano[0].conteo_cartas < 17) {
+        pedirCarta(0);
+    }
+    if (mano[0].conteo_cartas >= 17) {
+        paso(0);
+
+    }
+
+
+    return 0;
+}
+
+
+ void opcionesJugador(){
+	
+	int opcion;
+			/*cout << "Tus cartas: " << deckUser[0] << " - " << deckUser[1] << endl;*/
+	cout<<"La suma de tus cartas es: "<< "¿Qué deseas hacer?\n\n";
+	do{
+	cout<<"1) Pedir una carta más\n";
+	cout<<"2) Plantarse\n";
+	cout<<"3) Separar las cartas\n";
+	cin>>opcion;
+	
+	switch(opcion){
+	case 1:
+	
+	break;
+	
+	case 2:
+	
+	break;
+	
+	case 3:
+	
+	break;
+	
+	default:
+	cout<<"LA OPCION INGRESADA ES INCORRECTA, INTENTE NUEVAMENTE.\n\n";
+	break;
+	
+	}
+	} while(opcion!=4);
+	}
+
