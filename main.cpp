@@ -26,7 +26,8 @@ int main (int argc, char *argv[]) {
 	int opcionInicio=0;			//opcion de menu inicio
 	int sumaJugadorAs = 0;			//suma del jugador al que le tocaron 2 ases
 	int sumaJugadorAsDos = 0;		//suma de otro jugador al que le toquen 2 ases
-	bool tieneDobleAs = false;	//verifica condici�n de tener doble As
+	int valorAs;
+	int segundaCroupier;
 	
 	//Creacion del Mazo de 52 Cartas
 	for (int i=0; i<4; i++){											
@@ -86,18 +87,7 @@ int main (int argc, char *argv[]) {
 	}	
 	
 	//Reparte 2 cartas a cada jugador
-	repartir(mazo, cantJugadores, &indiceCartas, sumaJugadores, &sumaJugadorAs, &sumaJugadorAsDos, &tieneDobleAs);
-	
-//	for (int i=0; i<cantJugadores;i++){
-//		for(int j=0; j<2;j++){
-//			
-//			cout << jugadores[i] << " - Carta " << j+1 << ": ";
-//			cartas(mazo, &indiceCartas);
-//			sumaJugadores[i] += sumar(mazo, &indiceCartas);
-//			indiceCartas++;
-//		}
-//		cout << "Total " << jugadores[i] << " : " << sumaJugadores[i] << endl << endl;
-//	}
+	repartir(mazo, cantJugadores, &indiceCartas, sumaJugadores, &sumaJugadorAs, &sumaJugadorAsDos);
 	
 	//primera carta y suma croupier
 		cout << "Carta Croupier: ";
@@ -105,6 +95,12 @@ int main (int argc, char *argv[]) {
 		cartas(mazo, &indiceCartas);
 		sumaCroupier += sumar(mazo,&indiceCartas);
 		cout << endl;
+		
+		
+		//segunda carta
+		indiceCartas++;
+		segundaCroupier = mazo[indiceCartas];
+		sumaCroupier += segundaCroupier;
 	
 	
 	//bucle para opcion de juego de cada jugador
@@ -112,30 +108,52 @@ int main (int argc, char *argv[]) {
 		do{					
 			if(sumaJugadores[i] == 21){
 				cout << jugadores[i] << ", tiene BlackJack!!" << endl;
-			}else{
+			}else if(sumaJugadores[i] < 21){
 				cout << jugadores[i] << ", Total: " << sumaJugadores[i] << endl;
 				cout << "Que desea hacer: 1- Pedir o 2- Plantarse" << endl;
 				cin >> opcionDeJuego;
+				
 				switch(opcionDeJuego){
 				case 1:
 					++indiceCartas;
+					cout << "Nueva carta: ";
 					cartas(mazo, &indiceCartas);
-					sumaJugadores[i] += sumar(mazo, &indiceCartas);
-				break;
-				
+					
+					if(mazo[indiceCartas] == 1){
+						cout << "Elija el valor que adquirirá el As: " << endl;
+						cout << "1- El as valdrá 1" << endl;
+						cout << "2- El as valdrá 11" << endl;
+						cin >> valorAs;
+						
+						switch(valorAs){
+						case 1:
+							sumaJugadores[i] += 1;
+							break;
+						case 2:
+							sumaJugadores[i] += 11;
+							break;
+						default:
+							return 0;
+							break;
+						}
+					}else{
+						sumaJugadores[i] += sumar(mazo, &indiceCartas);
+						cout << "Total " << jugadores[i] << " : " << sumaJugadores[i] << endl << endl;
+					}
+					break;
 				case 2:
 					cout << "Total " << jugadores[i] << " : " << sumaJugadores[i] << endl << endl;
-				break;
+					break;
 				}
+			}else if(sumaJugadores[i] > 21){
+				cout << "Ha superado los 21 puntos. El croupier gana" << endl;
+				return 0;
 			}
-		}while(opcionDeJuego == 1 && sumaJugadores[i]<21);
+		}while(opcionDeJuego == 1);
 	}
-	
-	//segunda carta y suma croupier
-	cout << "Segunda Carta Croupier: ";
-	indiceCartas++;
-	cartas(mazo, &indiceCartas);
-	sumaCroupier += sumar(mazo, &indiceCartas);
+
+	//muestra suma del croupier
+	cout << "La segunda carta del croupier es: " << segundaCroupier << endl;
 	cout << "Total Croupier: " << sumaCroupier;
 	cout << endl;
 	
@@ -188,4 +206,6 @@ int main (int argc, char *argv[]) {
 		}
 	}
 }
+
+
 
