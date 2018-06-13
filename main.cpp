@@ -59,8 +59,8 @@ int main (int argc, char *argv[]) {
 		cout << "Ingrese su nombre: " << endl;
 		cin >> jugadores[0];
 		//apuestas
-	break;
-	
+		break;
+		
 	case 2:
 		cout << "Ingrese la cantidad de Jugadores: " << endl;
 		cin >> cantJugadores;
@@ -69,16 +69,16 @@ int main (int argc, char *argv[]) {
 			cin >> jugadores[i];
 		}
 		//apuestas
-	break;
-	
+		break;
+		
 	case 3:
 		return 0;
-	break;
-	
+		break;
+		
 	default:
 		cout << "Opcion incorrecta" << endl;
-	return 0;
-	break;
+		return 0;
+		break;
 	}
 	
 	//Inicializa en cero el vector de las sumas
@@ -90,17 +90,17 @@ int main (int argc, char *argv[]) {
 	repartir(mazo, cantJugadores, &indiceCartas, sumaJugadores, &sumaJugadorAs, &sumaJugadorAsDos);
 	
 	//primera carta y suma croupier
-		cout << "Carta Croupier: ";
-		indiceCartas++;
-		cartas(mazo, &indiceCartas);
-		sumaCroupier += sumar(mazo,&indiceCartas);
-		cout << endl;
-		
-		
-		//segunda carta
-		indiceCartas++;
-		segundaCroupier = mazo[indiceCartas];
-		sumaCroupier += segundaCroupier;
+	cout << "Carta Croupier: ";
+	indiceCartas++;
+	cartas(mazo, &indiceCartas);
+	sumaCroupier += sumar(mazo,&indiceCartas);
+	cout << endl;
+	
+	
+	//segunda carta
+	indiceCartas++;
+	segundaCroupier = mazo[indiceCartas];
+	sumaCroupier += segundaCroupier;
 	
 	
 	//bucle para opcion de juego de cada jugador
@@ -120,9 +120,9 @@ int main (int argc, char *argv[]) {
 					cartas(mazo, &indiceCartas);
 					
 					if(mazo[indiceCartas] == 1){
-						cout << "Elija el valor que adquirirÃ¡ el As: " << endl;
-						cout << "1- El as valdrÃ¡ 1" << endl;
-						cout << "2- El as valdrÃ¡ 11" << endl;
+						cout << "Elija el valor que adquirirá el As: " << endl;
+						cout << "1- El as valdrá 1" << endl;
+						cout << "2- El as valdrá 11" << endl;
 						cin >> valorAs;
 						
 						switch(valorAs){
@@ -151,14 +151,14 @@ int main (int argc, char *argv[]) {
 			}
 		}while(opcionDeJuego == 1);
 	}
-
+	
 	//muestra suma del croupier
 	cout << "La segunda carta del croupier es: " << segundaCroupier << endl;
 	cout << "Total Croupier: " << sumaCroupier;
 	cout << endl;
 	
 	//condicion del croupier para pedir o plantarse
- 	while(sumaCroupier<17){
+	while(sumaCroupier<17){
 		cout << "El Croupier tiene menos de 17, pedira otra carta" << endl;
 		indiceCartas++;
 		cout << "Carta: ";
@@ -174,7 +174,7 @@ int main (int argc, char *argv[]) {
 			cout << "Puntaje " << jugadores[i] << " : " << sumaJugadores[i] << endl;
 			cout << "Puntaje Croupier: " << sumaCroupier << endl;
 			cout << "El croupier gana - Tiene BlackJack" << endl;
-		
+			
 		}
 		if((sumaCroupier > 21) && (sumaJugadores[i] > 21)) {
 			cout << "Puntaje " << jugadores[i] << " : " << sumaJugadores[i] << endl;
@@ -186,13 +186,13 @@ int main (int argc, char *argv[]) {
 			cout << "Puntaje " << jugadores[i] << " : " << sumaJugadores[i] << endl;
 			cout << "Puntaje Croupier: " << sumaCroupier << endl;
 			cout << "El croupier gana" << endl;
-		
+			
 		} 
 		if((sumaJugadores[i] > 21) && (sumaCroupier < 21)) {
 			cout << "Puntaje " << jugadores[i] << " : " << sumaJugadores[i] << endl;
 			cout << "Puntaje Croupier: " << sumaCroupier << endl;
 			cout << "El croupier gana" << endl;
-		
+			
 		} 
 		if((sumaJugadores[i] < 21) && (sumaCroupier > 21)) {
 			cout << "Puntaje " << jugadores[i] << " : " << sumaJugadores[i] << endl;
@@ -206,6 +206,4 @@ int main (int argc, char *argv[]) {
 		}
 	}
 }
-
-
 

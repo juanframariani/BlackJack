@@ -6,10 +6,11 @@
 #include "cartas.h"
 #include "sumar.h"
 #include "repartir.h"
+
+
 using namespace std;
 
-
-void repartir (int mazo[], int cantJugadores, int * indiceCartas, int sumaJugadores[], int *sumaJugadorAs, int *sumaJugadorAsDos){
+void repartir (int mazo[], int cantJugadores, int * indiceCartas, int sumaJugadores[], int *sumaJugadorAs, int *sumaJugadorAsDos, bool *tieneDobleAs){
 	
 	for (int i=0; i<cantJugadores;i++){
 		for(int j=0; j<2;j++){
@@ -24,25 +25,24 @@ void repartir (int mazo[], int cantJugadores, int * indiceCartas, int sumaJugado
 				int opcionAs = 0;
 				
 				do{
-					cout << "Â¡Tiene doble As! Â¿Desea separar su apuesta?" << endl;
-					cout << "Si decide separar su apuesta, automÃ¡ticamente se pedirÃ¡" << endl;
+					cout << "¡Tiene doble As! ¿Desea separar su apuesta?" << endl;
+					cout << "Si decide separar su apuesta, automáticamente se pedirá" << endl;
 					cout << "una nueva carta para cada una de sus manos." << endl;
-					cout << "Caso contrario, uno de sus ases valdrÃ¡ 11 y el otro, 1." << endl;
-					cout << "1- SÃ­, deseo separar mi apuesta." << endl;
+					cout << "Caso contrario, uno de sus ases valdrá 11 y el otro, 1." << endl;
+					cout << "1- Sí, deseo separar mi apuesta." << endl;
 					cout << "2- No, quiero continuar con las cartas que tengo." << endl;
 					cin >> opcionAs;
 					
 					
 					switch(opcionAs){
 					case 1:
-						//*Inserte cÃ³digo del JuanJo aquÃ­ para apuestas
+						//*Inserte código del JuanJo aquí para apuestas
 						
-						cout << "Su mano se dividirÃ¡ en dos manos a partir de ahora." << endl;
-						cout << "Se le repartirÃ¡n dos cartas mÃ¡s, una por cada mano." << endl;
+						cout << "Su mano se dividirá en dos manos a partir de ahora." << endl;
+						cout << "Se le repartirán dos cartas más, una por cada mano." << endl;
 						
 						
 						if(sumaJugadorAs == 0){
-							
 							sumaJugadores[i] = 11;
 							cout << "Jugador " << i+1 << " - Mano 1 - Carta 1: ";
 							cartas(mazo, indiceCartas);
@@ -86,7 +86,7 @@ void repartir (int mazo[], int cantJugadores, int * indiceCartas, int sumaJugado
 						cout << "Total Jugador " << i+1 << " : 12." << endl;
 						break;
 					default:
-						cout << "OpciÃ³n incorrecta. Elija una opciÃ³n del menÃº." << endl;
+						cout << "Opción incorrecta. Elija una opción del menú." << endl;
 						break;
 					}
 				}while(opcionAs != 1 || opcionAs !=2);
