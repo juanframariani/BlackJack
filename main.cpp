@@ -24,13 +24,11 @@ int main (int argc, char *argv[]) {
 	int opcionDeJuego=1;		//opcion para pedir o plantarse de cada jugador
 	int sumaCroupier=0;			//suma de las cartas del croupier
 	int opcionInicio=0;			//opcion de menu inicio
-	int total;
-	int apuesta;
+	int total[5];
+	int apuesta = 0;
 	int saldoInicial = 100;
-	int apMinima =10;
-	int apMaxima = 50;
-	int apGanadora;
-	int apGanadoraB;
+
+
 	
 	//Creacion del Mazo de 52 Cartas
 	for (int i=0; i<4; i++){											
@@ -65,7 +63,6 @@ int main (int argc, char *argv[]) {
 			cout << "Ingrese su nombre: " << endl;
 			cin>> jugadores[0];
 
-			//apuestas
 			break;
 			
 		case 2:
@@ -75,7 +72,7 @@ int main (int argc, char *argv[]) {
 				cout << "Ingrese el nombre del jugador " << i+1 << " : ";
 				cin >> jugadores[i];
 			}
-			//apuestas
+			
 			break;
 			
 		case 3:
@@ -95,33 +92,24 @@ int main (int argc, char *argv[]) {
 		sumaJugadores[i] = 0;
 	}	
 	
-	//reparte 2 cartas a cada jugador
-	//	repartir(mazo, cantJugadores, &indiceCartas, sumaJugadores);				//falla el indiceCartas
+		
 	for (int i = 0; i < cantJugadores; i++) {
-		cout<<"\nUsted cuenta con un saldo inicial de: $"<<saldoInicial<< endl;
-		cout<<"La mesa cuenta con una apuesta mínima de $10 y una máxima de $50"<<endl;
+		cout<<"\nUsted cuenta con un saldo inicial de: $" << saldoInicial << endl;
+		cout<<"La mesa cuenta con una apuesta mÃ­nima de $10 y una máxima de $50" << endl;
 		do
 		{
-			cout << "\nJugador " << i + 1 << " haga su apuesta: $";
+			cout << jugadores[i] << " haga su apuesta: $";
 			cin >> apuesta;
-		} while(apuesta < apMinima || apuesta > apMaxima);
+		} while( apuesta < 10 || apuesta > 50);
 		
-		total = saldoInicial-apuesta;
-		apGanadora = (apuesta*2)+total;
-		apGanadoraB = (apuesta*3)+total;		
+		total[i] = saldoInicial-apuesta;
+				
 		
-	}
-	for (int i=0; i<cantJugadores;i++){
-		for(int j=0; j<2;j++){
-			
-			cout << jugadores[i] << " - Carta " << j+1 << ": ";
-			cartas(mazo, &indiceCartas);
-			sumaJugadores[i] += sumar(mazo, &indiceCartas);
-			indiceCartas++;
-		}
-		cout << "Total " << jugadores[i] << ": " << sumaJugadores[i] << endl << endl;
 	}
 	
+	//reparte 2 cartas a cada jugador
+	repartir(mazo, cantJugadores, &indiceCartas, sumaJugadores);	
+
 	//primera carta y suma croupier
 	cout << "Carta Croupier: ";
 	indiceCartas++;
@@ -137,7 +125,7 @@ int main (int argc, char *argv[]) {
 				cout << jugadores[i] << " tiene BlackJack!!" << endl;
 			}else{
 				cout << jugadores[i] << " Total: " << sumaJugadores[i] << endl;
-				cout << "\n¿Qué desea hacer?: \n1. Pedir \n2. Plantarse" << endl;
+				cout << "\nQué desea hacer?: \n1. Pedir \n2. Plantarse" << endl;
 				cout << "Ingrese la opción deseada: ";
 				cin >> opcionDeJuego;
 				switch(opcionDeJuego){
@@ -181,41 +169,42 @@ int main (int argc, char *argv[]) {
 			cout << "Puntaje " << jugadores[i] << ": " << sumaJugadores[i] << endl;
 			cout << "Puntaje Croupier: " << sumaCroupier << endl;
 			cout << "El croupier gana! Tiene BlackJack." << endl;			
-			cout << "\nEl nuevo saldo de "<<jugadores[i]<<" es de $"<< total<<endl;
+			cout << "\nEl nuevo saldo de "<<jugadores[i]<<" es de $" << total[i] <<endl;
 		}
 		if((sumaCroupier > 21) && (sumaJugadores[i] > 21)) {
 			cout << "Puntaje " << jugadores[i] << ": " << sumaJugadores[i] << endl;
 			cout << "Puntaje Croupier: " << sumaCroupier << endl;
 			cout << "Empate! Ambos se pasaron de 21." << endl;
-			cout << "\nEl nuevo saldo de "<<jugadores[i]<<" es de $"<< saldoInicial<<endl;
+			cout << "\nEl nuevo saldo de " << jugadores[i] << " es de $" << saldoInicial <<endl;
 			
 		}
 		if((sumaCroupier >= sumaJugadores[i]) && (sumaCroupier < 21)) {
 			cout << "Puntaje " << jugadores[i] << ": " << sumaJugadores[i] << endl;
 			cout << "Puntaje Croupier: " << sumaCroupier << endl;
 			cout << "El croupier gana." << endl;
-			cout << "\nEl nuevo saldo de "<<jugadores[i]<<" es de $"<< total<<endl;
+			cout << "\nEl nuevo saldo de "<<jugadores[i]<<" es de $"<< total[i] <<endl;
 		} 
 		if((sumaJugadores[i] > 21) && (sumaCroupier < 21)) {
 			cout << "Puntaje " << jugadores[i] << ": " << sumaJugadores[i] << endl;
 			cout << "Puntaje Croupier: " << sumaCroupier << endl;
 			cout << "El croupier gana." << endl;
-			cout << "\nEl nuevo saldo de "<<jugadores[i]<<" es de $"<< total<<endl;
+			cout << "\nEl nuevo saldo de " << jugadores[i] << " es de $" << total[i] <<endl;
 		} 
 		if((sumaJugadores[i] < 21) && (sumaCroupier > 21)) {
 			cout << "Puntaje " << jugadores[i] << ": " << sumaJugadores[i] << endl;
 			cout << "Puntaje Croupier: " << sumaCroupier << endl;
 			cout << jugadores[i] << " GANA!" << endl;
-			cout << "\nEl nuevo saldo de "<<jugadores[i]<<" es de $"<< apGanadora<<endl;
+			total[i]+=(apuesta*2);
+			cout << "\nEl nuevo saldo de " << jugadores[i] << " es de $" << total[i ] <<endl;
 		}
 		if((sumaJugadores[i] == 21) && (sumaCroupier < 21)) {
 			cout << "Puntaje " << jugadores[i] << ": " << sumaJugadores[i] << endl;
 			cout << "Puntaje Croupier: " << sumaCroupier << endl;
 			cout << jugadores[i] << " Gana! Tiene Black Jack." << endl;
-			cout << "\nEl nuevo saldo de "<<jugadores[i]<<" es de $ "<< apGanadoraB<<endl;
+			total[i]+=(apuesta*3);
+			cout << "\nEl nuevo saldo de " << jugadores[i] << " es de $ " << total[i] <<endl;
 		}
 		
 	}
-	
 
 }
